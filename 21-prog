@@ -1,0 +1,62 @@
+from random import *
+
+def crear_mazo():
+    return sample([(x,y) for x in ['A','J','Q','K'] + range(2,11) for y in ['P','C','T','D']],52)
+
+def existe_az(mano):
+    if mano!=[] :
+        if mano[0]=='A' :
+            return 10
+    return 0
+
+def val_mano(mano):
+    if mano!=[] :
+        if val_carta(mano[0])+val_mano(mano[1:])<=11 :
+            return val_carta(mano[0])+val_mano(mano[1:]) + existe_az(mano[0])
+        return val_carta(mano[0])+val_mano(mano[1:])
+    return 0
+        
+def val_carta(carta):
+    if carta!=[] :
+        if carta[0]=='A' :
+            return 1
+        if carta[0]=='J':
+            return 10
+        if carta[0]=='Q':
+            return 10
+        if carta[0]=='K':
+            return 10
+        return carta[0]
+    return 0
+
+def juego(mazo,manoc,manoj):
+    if mazo!=[] :
+        if manoc==[] and manoj==[] :
+            return juego(mazo[4:],manoc+mazo[:2],manoj+mazo[2:4])
+        print " casa: "
+        print manoc[1:]
+        print val_mano(manoc[1:])
+        print "jugador :"
+        print manoj 
+        print val_mano(manoj)
+        if val_mano(manoj)<=21 :
+            if val_mano(manoj)>=16:
+                if raw_input("ingrese s para robar ") == "s" :
+                    return juego(mazo[1:],manoc,manoj+[mazo[0]])
+                if val_mano(manoc)<val_mano(manoj) and val_mano(manoc)<21 :
+                    return juego(mazo[1:],manoc+[mazo[0]],manoj)
+                print " casa: "
+                print manoc
+                print val_mano(manoc)
+                print "jugador :"
+                print manoj 
+                print val_mano(manoj)
+            return juego(mazo[1:],manoc,manoj+[mazo[0]])
+        print " casa: "
+        print manoc
+        print val_mano(manoc)
+        print "jugador :"
+        print manoj 
+        print val_mano(manoj)
+
+juego(crear_mazo(),[],[])
