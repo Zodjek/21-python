@@ -51,7 +51,8 @@ def juego(mazo,manoc,manoj):
                 print "jugador :"
                 print manoj 
                 print val_mano(manoj)
-            return juego(mazo[1:],manoc,manoj+[mazo[0]])
+            Else:
+                return juego (mazo [1:], manoc, manoj + [mazo [0]))
         print " casa: "
         print manoc
         print val_mano(manoc)
