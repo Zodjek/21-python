@@ -52,7 +52,7 @@ def juego(mazo,manoc,manoj):
                 print manoj 
                 print val_mano(manoj)
             Else:
-                return juego (mazo [1:], manoc, manoj + [mazo [0]))
+                return juego (mazo [1:], manoc, manoj + [mazo [0]])
         print " casa: "
         print manoc
         print val_mano(manoc)
